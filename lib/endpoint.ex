@@ -8,12 +8,6 @@ defmodule Endpoint do
 
     # connect on startup
     router = Application.get_env(:endpoint, :router)
-    # TODO retry logic ?
-    case Node.connect(router) do
-      false -> raise "Router node down"
-      true -> IO.puts "connected to router"
-    end
-
     # Define workers and child supervisors to be supervised
     children = [
       worker(Endpoint.Discovery, []),
